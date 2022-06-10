@@ -9,7 +9,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [tours, setTours] = useState([]);
 
+  // function to remove tours
   const removeTour = (id) => {
+    // filter method that changes the length of the tours array
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   };
@@ -26,9 +28,13 @@ function App() {
       console.log(error);
     }
   };
+
+  // useEffect to invoke the fetchTours function
   useEffect(() => {
     fetchTours();
   }, []);
+
+  // loading before the API is fetched
   if (loading) {
     return (
       <main>
@@ -36,6 +42,8 @@ function App() {
       </main>
     );
   }
+
+  // conditional for tours after all are removed
   if (tours.length === 0) {
     return (
       <main>
@@ -48,6 +56,8 @@ function App() {
       </main>
     );
   }
+
+  // App
   return (
     <main>
       <Tours tours={tours} removeTour={removeTour} />
